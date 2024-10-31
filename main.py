@@ -35,7 +35,8 @@ async def main():
         for boop_number in range(0, AMOUNT_OF_BOOPS_TO_SEND):
             print(f"Sending {ACCOUNT_TO_BOOP} boop number: {boop_number+1}")
             await page.get_by_test_id("scroll-container").get_by_label("Boop").click()
-            await page.get_by_label("boop", exact=True).click()
+            #await page.get_by_label("boop", exact=True).click()
+            await page.get_by_label("BOOp", exact=True).click()
             await asyncio.sleep(1.5)
 
         await context.close()
