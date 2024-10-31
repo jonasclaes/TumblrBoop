@@ -33,7 +33,7 @@ in `config.py`:
 - `ACCOUNT_PASSWORD`: Your password for Tumblr.
 - `ACCOUNT_TOTP_SECRET`: (Optional) Your TOTP secret if you have two-factor authentication enabled. Leave as `None` if
   not used.
-- `ACCOUNT_TO_BOOP`: The Tumblr username of the account you wish to boop. This can be your own account.
+- `BOOP_LIST`: The Tumblr username of the accounts you wish to boop, separated by space. e.g. "blog1 blog2 blog3" This can be your own account.
 - `AMOUNT_OF_BOOPS_TO_SEND`: The total number of boops you wish to send.
 
 ## Usage

@@ -3,11 +3,12 @@ import asyncio
 import pyotp
 from playwright.async_api import async_playwright
 
-from config import ACCOUNT_EMAIL, ACCOUNT_PASSWORD, ACCOUNT_TOTP_SECRET, ACCOUNT_TO_BOOP, AMOUNT_OF_BOOPS_TO_SEND
+from config import ACCOUNT_EMAIL, ACCOUNT_PASSWORD, ACCOUNT_TOTP_SECRET, AMOUNT_OF_BOOPS_TO_SEND, BOOP_LIST
 
 
 async def main():
     async with async_playwright() as playwright:
+        account_list = BOOP_LIST.split()
         browser = await playwright.chromium.launch(headless=False)
         context = await browser.new_context()
         page = await context.new_page()
@@ -29,15 +30,16 @@ async def main():
             await page.locator("#glass-container").get_by_label("Log in").click()
 
         await page.get_by_label("Account", exact=True).wait_for()
+        
+        for account in account_list:
+            await page.goto(f"https://www.tumblr.com/{account}")
 
-        await page.goto(f"https://www.tumblr.com/{ACCOUNT_TO_BOOP}")
-
-        for boop_number in range(0, AMOUNT_OF_BOOPS_TO_SEND):
-            print(f"Sending {ACCOUNT_TO_BOOP} boop number: {boop_number+1}")
-            await page.get_by_test_id("scroll-container").get_by_label("Boop").click()
-            #await page.get_by_label("boop", exact=True).click()
-            await page.get_by_label("BOOp", exact=True).click()
-            await asyncio.sleep(1.5)
+            for boop_number in range(0, AMOUNT_OF_BOOPS_TO_SEND):
+                print(f"Sending {account} boop number: {boop_number+1}")
+                await page.get_by_test_id("scroll-container").get_by_label("Boop").first.click()
+                # await page.get_by_label("boop", exact=True).click()
+                await page.get_by_label("BOOp", exact=True).click()
+                await asyncio.sleep(1.5)
 
         await context.close()
         await browser.close()
