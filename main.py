@@ -3,7 +3,7 @@ import asyncio
 import pyotp
 from playwright.async_api import async_playwright
 
-from config import ACCOUNT_EMAIL, ACCOUNT_PASSWORD, ACCOUNT_TOTP_SECRET, AMOUNT_OF_BOOPS_TO_SEND, BOOP_LIST
+from config import ACCOUNT_EMAIL, ACCOUNT_PASSWORD, ACCOUNT_TOTP_SECRET, AMOUNT_OF_BOOPS_TO_SEND, ACCOUNTS_TO_BOOP
 
 
 async def main():
