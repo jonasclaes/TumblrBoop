@@ -8,7 +8,7 @@ from config import ACCOUNT_EMAIL, ACCOUNT_PASSWORD, ACCOUNT_TOTP_SECRET, AMOUNT_
 
 async def main():
     async with async_playwright() as playwright:
-        account_list = BOOP_LIST.split()
+        account_list = ACCOUNTS_TO_BOOP.split()
         browser = await playwright.chromium.launch(headless=False)
         context = await browser.new_context()
         page = await context.new_page()
